@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIF - Thai Indian Food And Snack Halal</title>
+    <meta name="description" content="อาหารไทย-อินเดีย ฮาลาล รสละมุน ถูกปากคนไทย สัมผัสประสบการณ์ความอร่อยที่ลงตัวในบรรยากาศร้านที่พรีเมียม">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <img src="LOGO.jpg" alt="TIF Logo">
+            </a>
+            <ul class="nav-links">
+                <li><a href="#about" data-th="เกี่ยวกับเรา" data-en="About Us">เกี่ยวกับเรา</a></li>
+                <li><a href="#recommended-menu" data-th="เมนูแนะนำ" data-en="Our Menus">เมนูแนะนำ</a></li>
+                <li><a href="#full-menu" data-th="เมนูฉบับเต็ม" data-en="Full Menu">เมนูฉบับเต็ม</a></li>
+                <li><a href="#atmosphere" data-th="บรรยากาศร้าน" data-en="Atmosphere">บรรยากาศร้าน</a></li>
+                <li><a href="#contact" data-th="ติดต่อเรา" data-en="Contact Us">ติดต่อเรา</a></li>
+            </ul>
+            <div class="lang-switch">
+                <button id="btn-th" class="active" onclick="switchLang('th')">TH</button>
+                <button id="btn-en" onclick="switchLang('en')">EN</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section 1: Hero Banner -->
+    <header class="hero" id="home">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1 class="headline">TIF<br><span data-th="Thai Indian Food And Snack Halal" data-en="Thai Indian Food And Snack Halal">Thai Indian Food And Snack Halal</span></h1>
+            <p class="sub-headline" data-th="อาหารไทย-อินเดีย ฮาลาล รสละมุน ถูกปากคนไทย" data-en="Halal Thai-Indian Cuisine, perfectly blended for the Thai palate">อาหารไทย-อินเดีย ฮาลาล รสละมุน ถูกปากคนไทย</p>
+            <a href="#recommended-menu" class="cta-button" data-th="ดูเมนูทั้งหมด" data-en="View All Menus">ดูเมนูทั้งหมด</a>
+        </div>
+    </header>
+
+    <!-- Section 2: About Us -->
+    <section class="about" id="about">
+        <div class="container about-container">
+            <div class="about-text">
+                <h2 class="section-title" data-th="จุดเด่นของเรา" data-en="Our Highlights">จุดเด่นของเรา</h2>
+                <div class="title-separator"></div>
+                <p data-th="สัมผัสประสบการณ์ความอร่อยที่ลงตัว กับอาหารฮาลาลที่ผสมผสานเอกลักษณ์ของเครื่องเทศอินเดียและความจัดจ้านของอาหารไทย ปรับรสชาติอย่างพิถีพิถันให้ละมุน ทานง่าย และถูกปากคนไทย ในบรรยากาศร้านที่พรีเมียมและเป็นกันเอง" data-en="Experience the perfect balance of flavors with our Halal cuisine that blends the unique spices of India with the bold tastes of Thailand. Meticulously adjusted for a smooth, easy-to-eat taste that pleases the Thai palate, all within a premium and friendly atmosphere.">สัมผัสประสบการณ์ความอร่อยที่ลงตัว กับอาหารฮาลาลที่ผสมผสานเอกลักษณ์ของเครื่องเทศอินเดียและความจัดจ้านของอาหารไทย ปรับรสชาติอย่างพิถีพิถันให้ละมุน ทานง่าย และถูกปากคนไทย ในบรรยากาศร้านที่พรีเมียมและเป็นกันเอง</p>
+            </div>
+            <div class="about-image-wrapper">
+                <img src="เมนูอาหาร/Bread chilli 60 บาท.jpg" alt="TIF Signature Dish" class="about-image">
+                <div class="gold-border"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Recommended Menu -->
+    <section class="menu" id="recommended-menu">
+        <div class="container">
+            <h2 class="section-title center" data-th="เมนูยอดฮิตของเรา" data-en="Our Popular Menus">เมนูยอดฮิตของเรา</h2>
+            <div class="title-separator center-sep"></div>
+            
+            <div class="menu-grid">
+                <div class="menu-item"><div class="menu-img-wrapper"><img src="เมนูอาหาร/Bread chilli 60 บาท.jpg" alt="Bread chilli"></div><div class="menu-info"><h3 class="menu-name" data-th="Bread chilli" data-en="Bread chilli">Bread chilli</h3><p class="menu-desc" data-th="ราคา 60 ฿" data-en="Price 60 ฿">ราคา 60 ฿</p></div></div>
+                <div class="menu-item"><div class="menu-img-wrapper"><img src="เมนูอาหาร/Bread chilli พร้อมชาอินเดีย 70 บาท.jpg" alt="Bread chilli พร้อมชาอินเดีย"></div><div class="menu-info"><h3 class="menu-name" data-th="Bread chilli พร้อมชาอินเดีย" data-en="Bread chilli with Indian Tea">Bread chilli พร้อมชาอินเดีย</h3><p class="menu-desc" data-th="ราคา 70 ฿" data-en="Price 70 ฿">ราคา 70 ฿</p></div></div>
+                <div class="menu-item"><div class="menu-img-wrapper"><img src="เมนูอาหาร/Bread pizza 60 บาท.jpg" alt="Bread pizza"></div><div class="menu-info"><h3 class="menu-name" data-th="Bread pizza" data-en="Bread pizza">Bread pizza</h3><p class="menu-desc" data-th="ราคา 60 ฿" data-en="Price 60 ฿">ราคา 60 ฿</p></div></div>
+                <div class="menu-item"><div class="menu-img-wrapper"><img src="เมนูอาหาร/Ghee rice 60 บาท.jpg" alt="Ghee rice"></div><div class="menu-info"><h3 class="menu-name" data-th="Ghee rice" data-en="Ghee rice">Ghee rice</h3><p class="menu-desc" data-th="ราคา 60 ฿" data-en="Price 60 ฿">ราคา 60 ฿</p></div></div>
+                <div class="menu-item"><div class="menu-img-wrapper"><img src="เมนูอาหาร/จาปาตี มาซาล่ามันฝรั่ง 60 บาท.jpg" alt="จาปาตี มาซาล่ามันฝรั่ง"></div><div class="menu-info"><h3 class="menu-name" data-th="จาปาตี มาซาล่ามันฝรั่ง" data-en="Chapati Potato Masala">จาปาตี มาซาล่ามันฝรั่ง</h3><p class="menu-desc" data-th="ราคา 60 ฿" data-en="Price 60 ฿">ราคา 60 ฿</p></div></div>
+                <div class="menu-item"><div class="menu-img-wrapper"><img src="เมนูอาหาร/ชุดพาโรทา แกงไข่ 60 บาท.jpg" alt="ชุดพาโรทา แกงไข่"></div><div class="menu-info"><h3 class="menu-name" data-th="ชุดพาโรทา แกงไข่" data-en="Parotha Set with Egg Curry">ชุดพาโรทา แกงไข่</h3><p class="menu-desc" data-th="ราคา 60 ฿" data-en="Price 60 ฿">ราคา 60 ฿</p></div></div>
+                <div class="menu-item"><div class="menu-img-wrapper"><img src="เมนูอาหาร/ชุดพาโรทา แกงไข่มาซาล่า 60 บาท.jpg" alt="ชุดพาโรทา แกงไข่มาซาล่า"></div><div class="menu-info"><h3 class="menu-name" data-th="ชุดพาโรทา แกงไข่มาซาล่า" data-en="Parotha Set with Egg Masala">ชุดพาโรทา แกงไข่มาซาล่า</h3><p class="menu-desc" data-th="ราคา 60 ฿" data-en="Price 60 ฿">ราคา 60 ฿</p></div></div>
+                <div class="menu-item"><div class="menu-img-wrapper"><img src="เมนูอาหาร/ชุดเซ็ทอาหาร 100.jpg" alt="ชุดเซ็ทอาหาร"></div><div class="menu-info"><h3 class="menu-name" data-th="ชุดเซ็ทอาหาร" data-en="Food Set 100">ชุดเซ็ทอาหาร</h3><p class="menu-desc" data-th="ราคา 100 ฿" data-en="Price 100 ฿">ราคา 100 ฿</p></div></div>
+                <div class="menu-item"><div class="menu-img-wrapper"><img src="เมนูอาหาร/ปับปัด 10 บาท.jpg" alt="ปับปัด"></div><div class="menu-info"><h3 class="menu-name" data-th="ปับปัด" data-en="Papad">ปับปัด</h3><p class="menu-desc" data-th="ราคา 10 ฿" data-en="Price 10 ฿">ราคา 10 ฿</p></div></div>
+                <div class="menu-item"><div class="menu-img-wrapper"><img src="เมนูอาหาร/ผัดผักอินเดีย 60 บาท.jpg" alt="ผัดผักอินเดีย"></div><div class="menu-info"><h3 class="menu-name" data-th="ผัดผักอินเดีย" data-en="Indian Stir-fried Vegetables">ผัดผักอินเดีย</h3><p class="menu-desc" data-th="ราคา 60 ฿" data-en="Price 60 ฿">ราคา 60 ฿</p></div></div>
+                <div class="menu-item"><div class="menu-img-wrapper"><img src="เมนูอาหาร/อุปามา ข้าวผัดอินเดีย.jpg" alt="อุปามา ข้าวผัดอินเดีย"></div><div class="menu-info"><h3 class="menu-name" data-th="อุปามา ข้าวผัดอินเดีย" data-en="Upma Indian Fried Rice">อุปามา ข้าวผัดอินเดีย</h3><p class="menu-desc" data-th="สอบถามราคาที่ร้าน" data-en="Ask for price">สอบถามราคาที่ร้าน</p></div></div>
+                <div class="menu-item"><div class="menu-img-wrapper"><img src="เมนูอาหาร/เวอร์มาซิลี 60.jpg" alt="เวอร์มาซิลี"></div><div class="menu-info"><h3 class="menu-name" data-th="เวอร์มาซิลี" data-en="Vermicelli">เวอร์มาซิลี</h3><p class="menu-desc" data-th="ราคา 60 ฿" data-en="Price 60 ฿">ราคา 60 ฿</p></div></div>
+                <div class="menu-item"><div class="menu-img-wrapper"><img src="เมนูอาหาร/เส้นหมี่อินเดีย 60 บาท.jpg" alt="เส้นหมี่อินเดีย"></div><div class="menu-info"><h3 class="menu-name" data-th="เส้นหมี่อินเดีย" data-en="Indian Rice Noodles">เส้นหมี่อินเดีย</h3><p class="menu-desc" data-th="ราคา 60 ฿" data-en="Price 60 ฿">ราคา 60 ฿</p></div></div>
+                <div class="menu-item"><div class="menu-img-wrapper"><img src="เมนูอาหาร/แกงถั่วลูกไก่ 40 บาท.jpg" alt="แกงถั่วลูกไก่"></div><div class="menu-info"><h3 class="menu-name" data-th="แกงถั่วลูกไก่" data-en="Chickpea Curry">แกงถั่วลูกไก่</h3><p class="menu-desc" data-th="ราคา 40 ฿" data-en="Price 40 ฿">ราคา 40 ฿</p></div></div>
+                <div class="menu-item"><div class="menu-img-wrapper"><img src="เมนูอาหาร/แกงไข่มาซาล่า 70 บาท.jpg" alt="แกงไข่มาซาล่า"></div><div class="menu-info"><h3 class="menu-name" data-th="แกงไข่มาซาล่า" data-en="Egg Masala">แกงไข่มาซาล่า</h3><p class="menu-desc" data-th="ราคา 70 ฿" data-en="Price 70 ฿">ราคา 70 ฿</p></div></div>
+                <div class="menu-item"><div class="menu-img-wrapper"><img src="เมนูอาหาร/แกงไข่มาซาล่า เป็นกับข้าว 70 บาท.jpg" alt="แกงไข่มาซาล่า เป็นกับข้าว"></div><div class="menu-info"><h3 class="menu-name" data-th="แกงไข่มาซาล่า เป็นกับข้าว" data-en="Egg Masala (Side Dish)">แกงไข่มาซาล่า เป็นกับข้าว</h3><p class="menu-desc" data-th="ราคา 70 ฿" data-en="Price 70 ฿">ราคา 70 ฿</p></div></div>
+                <div class="menu-item"><div class="menu-img-wrapper"><img src="เมนูอาหาร/แซนวิช 30 บาท.jpg" alt="แซนวิช"></div><div class="menu-info"><h3 class="menu-name" data-th="แซนวิช" data-en="Sandwich">แซนวิช</h3><p class="menu-desc" data-th="ราคา 30 ฿" data-en="Price 30 ฿">ราคา 30 ฿</p></div></div>
+                <div class="menu-item"><div class="menu-img-wrapper"><img src="เมนูอาหาร/โดซ่า แกงซัมบ้า 60 บาท.jpg" alt="โดซ่า แกงซัมบ้า"></div><div class="menu-info"><h3 class="menu-name" data-th="โดซ่า แกงซัมบ้า" data-en="Dosa Sambar">โดซ่า แกงซัมบ้า</h3><p class="menu-desc" data-th="ราคา 60 ฿" data-en="Price 60 ฿">ราคา 60 ฿</p></div></div>
+                <div class="menu-item"><div class="menu-img-wrapper"><img src="เมนูอาหาร/ไก่ผัดเครื่องเทศ 60 บาท.jpg" alt="ไก่ผัดเครื่องเทศ"></div><div class="menu-info"><h3 class="menu-name" data-th="ไก่ผัดเครื่องเทศ" data-en="Spicy Stir-fried Chicken">ไก่ผัดเครื่องเทศ</h3><p class="menu-desc" data-th="ราคา 60 ฿" data-en="Price 60 ฿">ราคา 60 ฿</p></div></div>
+                <div class="menu-item"><div class="menu-img-wrapper"><img src="เมนูอาหาร/โดนัทอินเดีย.jpg" alt="โดนัทอินเดีย"></div><div class="menu-info"><h3 class="menu-name" data-th="โดนัทอินเดีย" data-en="Indian Donut">โดนัทอินเดีย</h3><p class="menu-desc" data-th="สอบถามราคาที่ร้าน" data-en="Ask for price">สอบถามราคาที่ร้าน</p></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3.5: Full Menu Pages -->
+    <section class="full-menu" id="full-menu" style="padding: 100px 0; background-color: var(--dark-green);">
+        <div class="container">
+            <h2 class="section-title center" data-th="เมนูฉบับเต็ม" data-en="Full Menu">เมนูฉบับเต็ม</h2>
+            <div class="title-separator center-sep"></div>
+            
+            <div class="gallery" style="margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <div class="gallery-item large" style="border-radius: 8px; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.4); border: 2px solid var(--gold);">
+                    <img src="เมนูอาหาร/เมนูหน้า 1.jpg" alt="Menu Page 1" style="width: 100%; height: auto; display: block;">
+                </div>
+                <div class="gallery-item large" style="border-radius: 8px; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.4); border: 2px solid var(--gold);">
+                    <img src="เมนูอาหาร/เมนูหน้า 2.jpg" alt="Menu Page 2" style="width: 100%; height: auto; display: block;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Vibe & Atmosphere -->
+    <section class="atmosphere" id="atmosphere">
+        <div class="container">
+            <h2 class="section-title" data-th="บรรยากาศร้าน TIF" data-en="TIF Atmosphere">บรรยากาศร้าน TIF</h2>
+            <div class="title-separator"></div>
+            
+            <div class="gallery">
+                <div class="gallery-item large">
+                    <img src="บรรยากาศร้าน/bb74cbf7-3cf3-4d37-b6d0-f11e3adaee98.jpeg" alt="TIF Atmosphere">
+                </div>
+                <div class="gallery-item large">
+                    <img src="บรรยากาศร้าน/e9f5ef8e-26e0-4603-b6d1-51b7d54a6b9b.jpeg" alt="TIF Atmosphere">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Contact Us & Footer -->
+    <footer class="contact-footer" id="contact">
+        <div class="container footer-container">
+            <div class="footer-content">
+                <h2 class="section-title" data-th="สอบถามเส้นทาง สั่งอาหาร หรือสำรองที่นั่ง" data-en="For directions, ordering, or reservations">สอบถามเส้นทาง สั่งอาหาร หรือสำรองที่นั่ง</h2>
+                <div class="title-separator center-sep" style="margin-left: 0; margin-right: 0;"></div>
+                
+                <div class="contact-info">
+                    <a href="tel:0902607760" class="contact-item">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>090-260-7760</span>
+                    </a>
+                    <a href="https://line.me/ti/p/~0902607760" target="_blank" class="contact-item">
+                        <i class="fa-brands fa-line"></i>
+                        <span>0902607760</span>
+                    </a>
+                    <a href="https://www.facebook.com/share/1BJpetgB6M/" target="_blank" class="contact-item">
+                        <i class="fa-brands fa-facebook"></i>
+                        <span>Tif FoodandSnack</span>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-logo">
+                <img src="LOGO.jpg" alt="TIF Logo">
+            </div>
+        </div>
+        <div class="copyright">
+            <p>Copyright &copy; 2024 TIF Halal Food. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Navbar solid color on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Language Switcher Logic
+        function switchLang(lang) {
+            document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+                el.textContent = el.getAttribute('data-' + lang);
+            });
+            document.querySelectorAll('.lang-switch button').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('btn-' + lang).classList.add('active');
+            localStorage.setItem('tif-lang', lang);
+        }
+
+        // Initialize language
+        const savedLang = localStorage.getItem('tif-lang') || 'th';
+        switchLang(savedLang);
+    </script>
+</body>
+</html>
