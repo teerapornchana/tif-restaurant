@@ -163,11 +163,54 @@
         </div>
     </footer>
 
-    <!-- Floating Order Button -->
-    <a href="https://line.me/ti/p/~0902607760" target="_blank" class="floating-order-btn">
-        <i class="fa-brands fa-line"></i>
-        <span data-th="สั่งอาหาร" data-en="Order Now">สั่งอาหาร</span>
-    </a>
+    <!-- Floating Action Buttons -->
+    <div class="floating-actions">
+        <button id="openBookingBtn" class="floating-btn btn-book">
+            <i class="fa-solid fa-chair"></i>
+            <span data-th="จองโต๊ะ" data-en="Book Table">จองโต๊ะ</span>
+        </button>
+    </div>
+
+    <!-- Booking Modal -->
+    <div class="modal-overlay" id="bookingModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeBookingBtn"><i class="fa-solid fa-xmark"></i></button>
+            <h2 class="modal-title" style="color: var(--gold); font-family: var(--font-heading); margin-bottom: 5px;" data-th="จองโต๊ะ" data-en="Book a Table">จองโต๊ะ</h2>
+            <p class="modal-desc" style="color: var(--gray); margin-bottom: 20px;" data-th="กรุณากรอกข้อมูลเพื่อสำรองที่นั่ง" data-en="Please fill out your details to reserve.">กรุณากรอกข้อมูลเพื่อสำรองที่นั่ง</p>
+            
+            <form id="bookingForm" class="booking-form">
+                <div class="form-group">
+                    <label data-th="ชื่อ-นามสกุล" data-en="Full Name">ชื่อ-นามสกุล</label>
+                    <input type="text" required>
+                </div>
+                <div class="form-group">
+                    <label data-th="เบอร์โทรศัพท์" data-en="Phone Number">เบอร์โทรศัพท์</label>
+                    <input type="tel" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label data-th="วันที่" data-en="Date">วันที่</label>
+                        <input type="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label data-th="เวลา" data-en="Time">เวลา</label>
+                        <input type="time" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label data-th="จำนวนคน" data-en="Guests">จำนวนคน</label>
+                    <select required>
+                        <option value="1" data-th="1 ท่าน" data-en="1 Person">1 ท่าน</option>
+                        <option value="2" selected data-th="2 ท่าน" data-en="2 People">2 ท่าน</option>
+                        <option value="3" data-th="3 ท่าน" data-en="3 People">3 ท่าน</option>
+                        <option value="4" data-th="4 ท่าน" data-en="4 People">4 ท่าน</option>
+                        <option value="5+" data-th="5 ท่านขึ้นไป" data-en="5+ People">5 ท่านขึ้นไป</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-btn" style="margin-top: 15px; width: 100%;" data-th="ยืนยันการจอง" data-en="Confirm Booking">ยืนยันการจอง</button>
+            </form>
+        </div>
+    </div>
 
     <script>
         // Smooth scrolling for anchor links
@@ -203,6 +246,34 @@
         // Initialize language
         const savedLang = localStorage.getItem('tif-lang') || 'th';
         switchLang(savedLang);
+
+        // Booking Modal Logic
+        const bookingModal = document.getElementById('bookingModal');
+        const openBookingBtn = document.getElementById('openBookingBtn');
+        const closeBookingBtn = document.getElementById('closeBookingBtn');
+        const bookingForm = document.getElementById('bookingForm');
+
+        openBookingBtn.addEventListener('click', () => {
+            bookingModal.classList.add('active');
+        });
+
+        closeBookingBtn.addEventListener('click', () => {
+            bookingModal.classList.remove('active');
+        });
+
+        bookingModal.addEventListener('click', (e) => {
+            if (e.target === bookingModal) {
+                bookingModal.classList.remove('active');
+            }
+        });
+
+        bookingForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const successMsg = savedLang === 'en' ? '🎉 Booking Successful! We will contact you shortly.' : '🎉 ทำการจองสำเร็จ! ทางร้านจะติดต่อกลับเพื่อยืนยันเร็วๆนี้';
+            alert(successMsg);
+            bookingForm.reset();
+            bookingModal.classList.remove('active');
+        });
     </script>
 </body>
 </html>

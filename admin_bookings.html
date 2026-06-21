@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIF Admin - จัดการคิวการจอง</title>
+    <!-- Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Google Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --dark-green: #0a2e1f;
+            --gold: #D4AF37;
+            --black: #111111;
+            --white: #ffffff;
+            --gray: #f5f5f5;
+        }
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: var(--gray);
+            margin: 0;
+            padding: 0;
+            color: var(--black);
+        }
+        .navbar {
+            background-color: var(--dark-green);
+            padding: 15px 30px;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .navbar h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 25px;
+            min-height: 300px;
+        }
+        .header-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .btn-refresh {
+            background: var(--gold);
+            color: var(--black);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Prompt';
+            font-weight: 500;
+            transition: 0.3s;
+        }
+        .btn-refresh:hover {
+            background: #e6c55c;
+        }
+        
+        /* Table Styles */
+        .table-responsive {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 700px;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        th {
+            background-color: #f8f9fa;
+            color: #333;
+            font-weight: 600;
+        }
+        tr:hover {
+            background-color: #fdfdfd;
+        }
+        
+        /* Status Badges */
+        .status {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: inline-block;
+        }
+        .status.pending { background: #fff3cd; color: #856404; }
+        .status.confirmed { background: #d4edda; color: #155724; }
+        .status.cancelled { background: #f8d7da; color: #721c24; }
+
+        /* UI States (Loading, Empty, Error) */
+        .state-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        /* Spinner */
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--gold);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .error-icon {
+            font-size: 3.5rem;
+            color: #dc3545;
+            margin-bottom: 15px;
+        }
+        .empty-icon {
+            font-size: 3.5rem;
+            color: #adb5bd;
+            margin-bottom: 15px;
+        }
+        
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <h1><i class="fa-solid fa-clipboard-list"></i> TIF Admin - จัดการคิวจองโต๊ะ</h1>
+        <div><i class="fa-solid fa-user-circle"></i> Admin</div>
+    </nav>
+
+    <div class="container">
+        <div class="card">
+            <div class="header-actions">
+                <h2 style="margin: 0;">รายการจองโต๊ะ (Bookings)</h2>
+                <button class="btn-refresh" onclick="fetchBookings()"><i class="fa-solid fa-rotate-right"></i> รีเฟรชข้อมูล</button>
+            </div>
+
+            <!-- 1. Loading State -->
+            <div id="loadingState" class="state-container">
+                <div class="loader"></div>
+                <h3 style="margin: 0; color: #555;">กำลังโหลดข้อมูล...</h3>
+                <p style="color: #888; margin-top: 5px;">กรุณารอสักครู่</p>
+            </div>
+
+            <!-- 2. Error State -->
+            <div id="errorState" class="state-container hidden">
+                <i class="fa-solid fa-circle-exclamation error-icon"></i>
+                <h3 style="margin:0 0 10px 0;">เกิดข้อผิดพลาดในการดึงข้อมูล</h3>
+                <p id="errorMsg" style="color: #dc3545; font-weight: 500;">รายละเอียดข้อผิดพลาดจะแสดงที่นี่</p>
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-top: 20px; text-align: left; display: inline-block;">
+                    <strong>💡 วิธีแก้ไข:</strong>
+                    <ol style="margin: 5px 0 0 0; padding-left: 20px; color: #555;">
+                        <li>เปิดไฟล์ <code>admin_bookings.html</code></li>
+                        <li>ค้นหาตัวแปร <code>SUPABASE_URL</code> และ <code>SUPABASE_ANON_KEY</code></li>
+                        <li>แทนที่ด้วยค่าที่ได้จาก Project ของคุณ</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- 3. Empty State -->
+            <div id="emptyState" class="state-container hidden">
+                <i class="fa-solid fa-inbox empty-icon"></i>
+                <h3 style="margin:0 0 10px 0;">ยังไม่มีข้อมูล</h3>
+                <p style="color: #666;">เมื่อมีลูกค้าทำการจองโต๊ะเข้ามา ข้อมูลจะปรากฏที่นี่</p>
+            </div>
+
+            <!-- 4. Data Table State -->
+            <div id="dataTable" class="table-responsive hidden">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ชื่อลูกค้า</th>
+                            <th>เบอร์โทร</th>
+                            <th>วันที่</th>
+                            <th>เวลา</th>
+                            <th>จำนวนคน</th>
+                            <th>สถานะ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- ข้อมูลจะถูกนำมาใส่ตรงนี้ด้วย JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // การตั้งค่า Supabase
+        // ==========================================
+        // ⚠️ นำ URL และ ANON_KEY จาก Supabase ของคุณมาใส่ตรงนี้
+        const SUPABASE_URL = 'https://YOUR-PROJECT-ID.supabase.co';
+        const SUPABASE_ANON_KEY = 'YOUR-ANON-KEY';
+
+        // สร้าง Supabase Client instance
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // ==========================================
+        // การจัดการ UI States
+        // ==========================================
+        const states = {
+            loading: document.getElementById('loadingState'),
+            error: document.getElementById('errorState'),
+            empty: document.getElementById('emptyState'),
+            data: document.getElementById('dataTable')
+        };
+        const tableBody = document.getElementById('tableBody');
+        const errorMsg = document.getElementById('errorMsg');
+
+        // ฟังก์ชันซ่อนทุก State
+        function hideAllStates() {
+            Object.values(states).forEach(el => el.classList.add('hidden'));
+        }
+
+        // ==========================================
+        // ฟังก์ชันหลัก: ดึงข้อมูลและแสดงผล
+        // ==========================================
+        async function fetchBookings() {
+            // 1. แสดง Loading ตอนเริ่มโหลด
+            hideAllStates();
+            states.loading.classList.remove('hidden');
+            tableBody.innerHTML = ''; 
+
+            try {
+                // เช็คกันลืมใส่ Key
+                if (SUPABASE_URL.includes('YOUR-PROJECT-ID')) {
+                    throw new Error("คุณยังไม่ได้เปลี่ยนค่า SUPABASE_URL และ SUPABASE_ANON_KEY");
+                }
+
+                // 2. ดึงข้อมูล (Select)
+                // ดึงจากตาราง 'bookings' เรียงจากใหม่ไปเก่า
+                const { data, error } = await supabase
+                    .from('bookings')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+
+                // ถ้าติด Error จาก Database ให้โยนเข้า Catch
+                if (error) throw error;
+
+                // โหลดเสร็จแล้ว ซ่อน Loading
+                hideAllStates();
+
+                // 3. ตรวจสอบว่ามีข้อมูลหรือไม่ (Empty State)
+                if (!data || data.length === 0) {
+                    states.empty.classList.remove('hidden');
+                    return;
+                }
+
+                // 4. แสดงตารางข้อมูล (Data State)
+                states.data.classList.remove('hidden');
+                
+                // นำข้อมูลที่ได้มาวนลูปสร้างตาราง (Row)
+                data.forEach(booking => {
+                    const row = document.createElement('tr');
+                    
+                    // แปลงรูปแบบสถานะให้เป็นป้ายสีสวยงาม
+                    let statusHtml = '';
+                    if(booking.status === 'pending') statusHtml = '<span class="status pending">รอยืนยัน</span>';
+                    else if(booking.status === 'confirmed') statusHtml = '<span class="status confirmed">ยืนยันแล้ว</span>';
+                    else if(booking.status === 'cancelled') statusHtml = '<span class="status cancelled">ยกเลิก</span>';
+                    else statusHtml = `<span class="status">${booking.status}</span>`;
+
+                    // แปลงรูปแบบวันที่ให้อ่านง่าย
+                    const dateObj = new Date(booking.booking_date);
+                    const formattedDate = isNaN(dateObj) ? booking.booking_date : dateObj.toLocaleDateString('th-TH', { year: 'numeric', month: 'short', day: 'numeric' });
+
+                    // ตัดเวลาให้เหลือแค่ HH:MM
+                    const timeStr = booking.booking_time ? booking.booking_time.substring(0, 5) : '-';
+
+                    // ประกอบ HTML ของ 1 แถว
+                    row.innerHTML = `
+                        <td style="font-weight: 500;">${booking.customer_name || '-'}</td>
+                        <td>${booking.customer_phone || '-'}</td>
+                        <td>${formattedDate}</td>
+                        <td>${timeStr} น.</td>
+                        <td><i class="fa-solid fa-user-group" style="color:#aaa; font-size:0.8rem; margin-right:5px;"></i> ${booking.pax} ท่าน</td>
+                        <td>${statusHtml}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+
+            } catch (err) {
+                // 5. แสดง Error State เมื่อมีปัญหา
+                console.error("Error fetching data:", err);
+                hideAllStates();
+                states.error.classList.remove('hidden');
+                errorMsg.textContent = err.message || "เกิดปัญหาในการเชื่อมต่อฐานข้อมูล";
+            }
+        }
+
+        // เริ่มดึงข้อมูลทันทีเมื่อโหลดหน้าเว็บเสร็จ
+        window.addEventListener('DOMContentLoaded', fetchBookings);
+    </script>
+</body>
+</html>
