@@ -450,6 +450,38 @@ a {
     color: var(--black);
 }
 
+/* Floating Order Button */
+.floating-order-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: var(--gold);
+    color: var(--black);
+    padding: 15px 25px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1.1rem;
+    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+    z-index: 999;
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.floating-order-btn i {
+    font-size: 1.5rem;
+}
+
+.floating-order-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    background-color: #fff;
+    color: var(--black);
+    box-shadow: 0 15px 30px rgba(255, 255, 255, 0.4);
+}
+
 /* Responsive Design */
 @media (max-width: 992px) {
     .headline { font-size: 4rem; }
@@ -463,6 +495,12 @@ a {
 @media (max-width: 768px) {
     .nav-links { display: none; } /* Simple mobile hidden nav for now */
     .lang-switch { margin-left: auto; }
+    .floating-order-btn {
+        bottom: 20px;
+        right: 20px;
+        padding: 12px 20px;
+        font-size: 1rem;
+    }
     .headline { font-size: 3rem; }
     .sub-headline { font-size: 1.2rem; }
     .section-title { font-size: 2rem; }
